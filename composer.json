@@ -1,0 +1,25 @@
+{
+    "name": "yohang/satis-admin",
+
+    "require": {
+        "composer/composer": "1.0.*@dev",
+        "composer/satis":    "dev-master@dev",
+        "silex/silex":       "1.0.*@dev"
+    },
+
+    "require-dev": {
+        "behat/behat":                  "2.4.*",
+        "behat/mink-extension":         "1.0.*",
+        "behat/mink-browserkit-driver": "1.0.*"
+    },
+
+    "config": {
+        "bin-dir": "bin/"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "SatisAdmin": "src"
+        }
+    }
+}
