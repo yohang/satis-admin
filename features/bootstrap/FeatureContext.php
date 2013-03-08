@@ -36,4 +36,15 @@ class FeatureContext extends BehatContext
         $this->setMink(new Mink(array('silex' => new Session(new BrowserKitDriver(new Client($app))))));
         $this->getMink()->setDefaultSessionName('silex');
     }
+
+    /**
+     * @Then /^The following repositories are visible:$/
+     */
+    public function theFollowingRepositoriesAreVisible(TableNode $table)
+    {
+        foreach ($table->getHash() as $row) {
+            $this->assertPageContainsText($row['type']);
+            $this->assertPageContainsText($row['url']);
+        }
+    }
 }

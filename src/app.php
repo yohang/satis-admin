@@ -1,5 +1,3 @@
 <?php
 
-$app = new SatisAdmin\Application;
-
-return $app;
+return new SatisAdmin\Application('prod');
