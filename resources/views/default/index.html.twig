@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>{{ config.name }}</h2>
+    <h2>{{ config.name }}<a href="{{ path('config_edit') }}">Edit configuration</a></h2>
     <h3>Repositories</h3>
     <table>
         <thead>
             <tr>
                 <th>Type</th>
                 <th>Url</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +15,6 @@
                 <tr>
                     <td>{{ repository.type }}</td>
                     <td>{{ repository.url }}</td>
-                    <td></td>
                 </tr>
             {% endfor %}
         </tbody>

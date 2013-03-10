@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Edit configuration</h2>
+    <form method="POST" action="{{ path('config_update') }}">
+        {{ form_rest(form) }}
+
+        <div class="form-actions">
+            <button type="submit">Save</button>
+        </div>
+    </form>
+{% endblock %}

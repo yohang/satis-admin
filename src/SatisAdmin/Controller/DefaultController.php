@@ -2,13 +2,15 @@
 
 namespace SatisAdmin\Controller;
 
+use SatisAdmin\Form\ConfigType;
 use Silex\Application;
-use Silex\ControllerProviderInterface;
+use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class DefaultController implements ControllerProviderInterface
+class DefaultController extends Controller
 {
     /**
      * @var \SatisAdmin\Application
@@ -18,16 +20,16 @@ class DefaultController implements ControllerProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function connect(Application $app)
+    public function mount(ControllerCollection $controllers)
     {
-        $this->app   = $app;
-        $controllers = $app['controllers_factory'];
-
-        $controllers->get('/', array($this, 'indexAction'));
-
-        return $controllers;
+        $controllers->get('/', array($this, 'indexAction'))->bind('config_index');
+        $controllers->get('/edit', array($this, 'editAction'))->bind('config_edit');
+        $controllers->post('/edit', array($this, 'updateAction'))->bind('config_update');
     }
 
+    /**
+     * @return string
+     */
     public function indexAction()
     {
         return $this->render(
@@ -39,21 +41,31 @@ class DefaultController implements ControllerProviderInterface
     }
 
     /**
-     * @param string $template
-     * @param array  $params
-     *
      * @return string
      */
-    protected function render($template, array $params = array())
+    public function editAction()
     {
-        return $this->app['twig']->render($template, $params);
+        return $this->render(
+            'default/edit.html.twig',
+            array(
+                'form' => $this->getFormFactory()->create(new ConfigType)->createView()
+            )
+        );
     }
 
     /**
-     * @return \SatisAdmin\Model\ModelManager
+     * @param Request $request
+     *
+     * @return string
      */
-    protected function getModelManager()
+    public function updateAction(Request $request)
     {
-        return $this->app['model_manager'];
+        $form = $this->getFormFactory()->create(new ConfigType);
+        $form->bind($request);
+        if ($form->isValid()) {
+            $this->app->redirect($this->getRouter()->generate('config_index'));
+        }
+
+        return $this->render('default/edit.html.twig', array('form' => $form->createView()));
     }
 }

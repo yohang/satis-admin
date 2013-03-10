@@ -6,7 +6,9 @@
         "composer/composer":              "1.0.*@dev",
         "composer/satis":                 "dev-master@dev",
         "silex/silex":                    "1.0.*@dev",
-        "silex/web-profiler":             "1.0.*@dev"
+        "silex/web-profiler":             "1.0.*@dev",
+        "symfony/form":                   "2.2.*",
+        "symfony/validator":              "2.2.*"
     },
 
     "require-dev": {

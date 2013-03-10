@@ -47,4 +47,14 @@ class FeatureContext extends BehatContext
             $this->assertPageContainsText($row['url']);
         }
     }
+
+    /**
+     * @When /^I fill the form with$/
+     */
+    public function iFillTheFormWith(TableNode $table)
+    {
+        foreach ($table->getHash() as $row) {
+            $this->getSession()->getPage()->fillField($row['field'], $row['value']);
+        }
+    }
 }

@@ -2,6 +2,9 @@
 
 namespace SatisAdmin\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
@@ -126,5 +129,14 @@ class Config implements \JsonSerializable
         }
 
         return $this;
+    }
+
+    /**
+     * @param ClassMetadata $metadata
+     */
+    static public function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('homepage', new Assert\NotBlank);
     }
 }
