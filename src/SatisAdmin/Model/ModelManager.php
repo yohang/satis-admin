@@ -41,4 +41,12 @@ class ModelManager
             )
         );
     }
+
+    /**
+     * @param Config $config
+     */
+    public function persist(Config $config)
+    {
+        $this->filesystem->write($this->configFile, json_encode($config), true);
+    }
 }

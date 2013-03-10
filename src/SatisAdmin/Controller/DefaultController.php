@@ -45,12 +45,7 @@ class DefaultController extends Controller
      */
     public function editAction()
     {
-        return $this->render(
-            'default/edit.html.twig',
-            array(
-                'form' => $this->getFormFactory()->create(new ConfigType)->createView()
-            )
-        );
+        return $this->render('default/edit.html.twig', array('form' => $this->getForm()->createView()));
     }
 
     /**
@@ -60,12 +55,22 @@ class DefaultController extends Controller
      */
     public function updateAction(Request $request)
     {
-        $form = $this->getFormFactory()->create(new ConfigType);
+        $form = $this->getForm();
         $form->bind($request);
         if ($form->isValid()) {
+            $this->getModelManager()->persist($form->getData());
+
             $this->app->redirect($this->getRouter()->generate('config_index'));
         }
 
         return $this->render('default/edit.html.twig', array('form' => $form->createView()));
+    }
+
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    protected function getForm()
+    {
+        return $this->getFormFactory()->create(new ConfigType, $this->getModelManager()->getConfig());
     }
 }
