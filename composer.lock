@@ -1,5 +1,5 @@
 {
-    "hash": "6abf79c7a7d6f9fc6e397da17d9b4930",
+    "hash": "b4c3ad56086532d8899c850b2287ad12",
     "packages": [
         {
             "name": "bt51/gaufrette-serviceprovider",
@@ -298,6 +298,105 @@
                 "media"
             ],
             "time": "2013-01-25 08:51:55"
+        },
+        {
+            "name": "kriswallsmith/assetic",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "http://github.com/kriswallsmith/assetic.git",
+                "reference": "v1.0.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/kriswallsmith/assetic/zipball/v1.0.4",
+                "reference": "v1.0.4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Assetic": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Asset Management for PHP",
+            "homepage": "https://github.com/kriswallsmith/assetic",
+            "keywords": [
+                "assets",
+                "compression",
+                "minification"
+            ],
+            "time": "2012-08-28 05:18:28"
+        },
+        {
+            "name": "mheap/silex-assetic",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mheap/Silex-Assetic.git",
+                "reference": "d30a4320220ddcde8daf350387cebc3f2ecd1d4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mheap/Silex-Assetic/zipball/d30a4320220ddcde8daf350387cebc3f2ecd1d4b",
+                "reference": "d30a4320220ddcde8daf350387cebc3f2ecd1d4b",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/assetic": ">=1.0",
+                "php": ">=5.3.0",
+                "symfony/finder": ">=2.1,<2.3"
+            },
+            "require-dev": {
+                "silex/silex": "*",
+                "twig/twig": ">=1.2.0"
+            },
+            "suggest": {
+                "twig/twig": ">=1.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SilexAssetic": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Eisenschmidt",
+                    "email": "sven.eisenschmidt@gmail.com",
+                    "homepage": "http://unsicherheitsagent.de/"
+                },
+                {
+                    "name": "Michael Heap",
+                    "email": "m@michaelheap.com",
+                    "homepage": "http://michaelheap.com/"
+                }
+            ],
+            "description": "Assetic extension for Silex",
+            "homepage": "https://github.com/mheap/Silex-Assetic",
+            "keywords": [
+                "assetic",
+                "silex"
+            ],
+            "time": "2013-02-27 09:57:34"
         },
         {
             "name": "pimple/pimple",
@@ -1482,6 +1581,51 @@
                 "templating"
             ],
             "time": "2013-02-09 18:21:53"
+        },
+        {
+            "name": "yohang/dependency-tools",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:yohang/dependency-tools.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/yohang/dependency-tools/zipball/1.0.1",
+                "reference": "1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/process": ">=2.0,<2.3-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Yohang": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yohan Giarelli",
+                    "email": "yohan@giarel.li",
+                    "homepage": "http://yohan.giarel.li"
+                }
+            ],
+            "description": "A simple Composer script to install NPM and/or Bower dependencies",
+            "homepage": "https://github.com/yohang/dependency-tools",
+            "keywords": [
+                "bower",
+                "composer",
+                "dependency",
+                "npm"
+            ],
+            "time": "2012-10-27 06:01:34"
         }
     ],
     "packages-dev": [
@@ -2553,6 +2697,7 @@
     "stability-flags": {
         "composer/composer": 20,
         "composer/satis": 20,
+        "mheap/silex-assetic": 20,
         "silex/silex": 20,
         "silex/web-profiler": 20
     },

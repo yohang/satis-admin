@@ -5,10 +5,12 @@
         "bt51/gaufrette-serviceprovider": "1.0.*",
         "composer/composer":              "1.0.*@dev",
         "composer/satis":                 "dev-master@dev",
+        "mheap/silex-assetic":            "*@dev",
         "silex/silex":                    "1.0.*@dev",
         "silex/web-profiler":             "1.0.*@dev",
         "symfony/form":                   "2.2.*",
-        "symfony/validator":              "2.2.*"
+        "symfony/validator":              "2.2.*",
+        "yohang/dependency-tools":        "1.0.*"
     },
 
     "require-dev": {
@@ -26,6 +28,22 @@
     "autoload": {
         "psr-0": {
             "SatisAdmin": "src"
+        }
+    },
+
+    "scripts": {
+        "post-install-cmd": [
+            "Yohang\\DependencyTools::installDeps"
+        ],
+        "post-update-cmd": [
+            "Yohang\\DependencyTools::installDeps"
+        ]
+    },
+
+    "extra": {
+        "dependency-tools": {
+            "npm": true,
+            "bower": true
         }
     }
 }

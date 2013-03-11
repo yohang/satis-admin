@@ -13,6 +13,7 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
+use SilexAssetic\AsseticExtension;
 
 /**
  * The Application.
@@ -36,11 +37,13 @@ class Application extends BaseApplication
 
     protected function registerConfig($env)
     {
-        $this['app.root_dir']      = realpath(__DIR__.'/../..');
-        $this['app.cache_dir']     = $this['app.root_dir'].'/cache';
-        $this['app.config_dir']    = $this['app.root_dir'].'/config';
-        $this['app.data_dir']      = $this['app.root_dir'].'/data';
-        $this['app.resources_dir'] = $this['app.root_dir'].'/resources';
+        $this['app.root_dir']       = realpath(__DIR__.'/../..');
+        $this['app.cache_dir']      = $this['app.root_dir'].'/cache';
+        $this['app.config_dir']     = $this['app.root_dir'].'/config';
+        $this['app.components_dir'] = $this['app.root_dir'].'/components';
+        $this['app.data_dir']       = $this['app.root_dir'].'/data';
+        $this['app.resources_dir']  = $this['app.root_dir'].'/resources';
+        $this['app.web_dir']        = $this['app.root_dir'].'/web';
 
         require sprintf('%s/%s.php', $this['app.config_dir'], $env);
     }
@@ -68,13 +71,13 @@ class Application extends BaseApplication
         $this->register(
             new TwigServiceProvider,
             array(
-                'debug'        => $this['debug'],
-                'twig.path'    => $this['app.resources_dir'].'/views',
-                'twig.options' => array(
-                    'cache' => $this['app.cache_dir'].'/twig'
-                )
+                'debug'               => $this['debug'],
+                'twig.path'           => $this['app.resources_dir'].'/views',
+                'twig.options'        => array('cache' => $this['app.cache_dir'].'/twig'),
+                'twig.form.templates' => array('form/form_div_layout.html.twig')
             )
         );
+        $this->register(new AsseticExtension, require $this['app.config_dir'].'/assetic.php');
 
         if ($this['debug']) {
             $this->register(

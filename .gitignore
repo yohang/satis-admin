@@ -1,4 +1,8 @@
-/vendor
 /bin
-/data/config.json
 /cache
+/components
+/data/config.json
+/node_modules
+/vendor
+/web/css
+/web/js
