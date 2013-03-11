@@ -6,12 +6,10 @@ use Behat\Behat\Context\TranslatedContextInterface;
 use Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Mink\Driver\BrowserKitDriver;
-use Behat\Mink\Mink;
-use Behat\Mink\Session;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\MinkDictionary;
-use Symfony\Component\HttpKernel\Client;
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+
+require_once __DIR__.'/../../vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
 
 /**
  * Features context.
@@ -28,13 +26,6 @@ class FeatureContext extends BehatContext
      */
     public function __construct(array $parameters)
     {
-        static $app;
-        if (null === $app) {
-            $app = require_once __DIR__.'/../../src/app_test.php';
-        }
-
-        $this->setMink(new Mink(array('silex' => new Session(new BrowserKitDriver(new Client($app))))));
-        $this->getMink()->setDefaultSessionName('silex');
     }
 
     /**
@@ -42,7 +33,10 @@ class FeatureContext extends BehatContext
      */
     public function theFollowingRepositoriesAreVisible(TableNode $table)
     {
-        foreach ($table->getHash() as $row) {
+        $tableHash = $table->getHash();
+        assertCount(count($tableHash), $this->getSession()->getPage()->findAll('css', '.repositories .repository'));
+
+        foreach ($tableHash as $row) {
             $this->assertPageContainsText($row['type']);
             $this->assertPageContainsText($row['url']);
         }
@@ -56,5 +50,21 @@ class FeatureContext extends BehatContext
         foreach ($table->getHash() as $row) {
             $this->getSession()->getPage()->fillField($row['field'], $row['value']);
         }
+    }
+
+    /**
+     * @Given /^I fill the last "([^"]*)" field with "([^"]*)"$/
+     */
+    public function iFillTheLastFieldWith($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^I follow the last "([^"]*)" link$/
+     */
+    public function iFollowTheLastLink($arg1)
+    {
+        throw new PendingException();
     }
 }

@@ -3,7 +3,7 @@
 {% block body %}
     <h2>{{ config.name }}<a href="{{ path('config_edit') }}">Edit configuration</a></h2>
     <h3>Repositories</h3>
-    <table>
+    <table class="repositories">
         <thead>
             <tr>
                 <th>Type</th>
@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             {% for repository in config.repositories %}
-                <tr>
+                <tr class="repository">
                     <td>{{ repository.type }}</td>
                     <td>{{ repository.url }}</td>
                 </tr>
