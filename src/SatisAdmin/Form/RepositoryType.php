@@ -6,10 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-/**
- * @author Yohan Giarelli <yohan@frequence-web.fr>
- */
-class ConfigType extends AbstractType
+class RepositoryType extends AbstractType
 {
     /**
      * {@inheritDoc}
@@ -17,9 +14,8 @@ class ConfigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('homepage')
-            ->add('repositories', 'collection', array('type' => new RepositoryType));
+            ->add('type')
+            ->add('url');
     }
 
     /**
@@ -27,7 +23,7 @@ class ConfigType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('data_class' => 'SatisAdmin\Model\Config'));
+        $resolver->setDefaults(array('data_class' => 'SatisAdmin\Model\Repository'));
     }
 
     /**
@@ -35,6 +31,6 @@ class ConfigType extends AbstractType
      */
     public function getName()
     {
-        return 'config';
+        return 'repository';
     }
 }
