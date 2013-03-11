@@ -60,7 +60,7 @@ class DefaultController extends Controller
         if ($form->isValid()) {
             $this->getModelManager()->persist($form->getData());
 
-            $this->app->redirect($this->getRouter()->generate('config_index'));
+            return $this->app->redirect($this->getRouter()->generate('config_index'));
         }
 
         return $this->render('default/edit.html.twig', array('form' => $form->createView()));

@@ -100,7 +100,7 @@ class Config implements \JsonSerializable
             $repository = array_search($repository, $this->repositories);
         }
 
-        unset($this->repositories);
+        unset($this->repositories[$repository]);
     }
 
     /**

@@ -19,7 +19,15 @@ class ConfigType extends AbstractType
         $builder
             ->add('name')
             ->add('homepage')
-            ->add('repositories', 'collection', array('type' => new RepositoryType));
+            ->add(
+                'repositories',
+                'collection',
+                array(
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    'type'         => new RepositoryType,
+                )
+            );
     }
 
     /**

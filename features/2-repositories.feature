@@ -20,7 +20,7 @@ Feature: Manage repository collection
     @javascript
     Scenario: Remove a line
         Given I am on "/edit"
-        When I follow the last "Remove repository" link
+        When I follow the last remove repository link
         And I press "Save"
         Then The following repositories are visible:
             | type | url                                            |

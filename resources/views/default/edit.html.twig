@@ -1,8 +1,25 @@
 {% extends 'base.html.twig' %}
+{% from _self import render_prototype %}
+{% from _self import repository_form %}
 
 {% block body %}
     <h2>Edit configuration</h2>
-    <form method="POST" action="{{ path('config_update') }}" class="form form-horizontal">
+    <form method="POST" action="{{ path('config_update') }}" class="form form-horizontal" id="config-form">
+        {{ form_row(form.name) }}
+        {{ form_row(form.homepage) }}
+
+        <fieldset class="repositories">
+            <legend>Repositories</legend>
+            {% for repository in form.repositories %}
+                {{ repository_form(repository) }}
+            {% endfor %}
+            <div data-behavior="new-repositories"></div>
+            <a class="btn btn-success" data-behavior="add-repository" data-prototype="{{ render_prototype(form) }}">
+                <i class="icon icon-plus"></i>
+                <span class="hide">Add repository</span>
+            </a>
+        </fieldset>
+
         {{ form_rest(form) }}
 
         <div class="form-actions">
@@ -10,3 +27,21 @@
         </div>
     </form>
 {% endblock %}
+
+{% macro repository_form(form) %}
+    <div class="control-group repository" data-behavior="repository">
+        <div class="controls">
+            {{ form_widget(form.type) }}
+            {{ form_widget(form.url) }}
+
+            <a class="btn btn-danger remove" data-behavior="remove-repository">
+                <i class="icon icon-white icon-delete"></i>
+                <span class="hide">Remove repository</span>
+            </a>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_prototype(form) %}
+    {{ _self.repository_form(form.repositories.vars.prototype) | e }}
+{% endmacro %}

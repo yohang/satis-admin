@@ -5,7 +5,7 @@ default:
     extensions:
         SatisAdmin\MinkExtension\Extension:
         Behat\MinkExtension\Extension:
-            base_url:           'http://localhost:8000/'
+            base_url:           'http://localhost:8000/index_dev.php'
             default_session:    silex
             javascript_session: selenium2
             selenium2:

@@ -7,6 +7,7 @@ use Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ResponseTextException;
 use Behat\MinkExtension\Context\MinkDictionary;
 
 require_once __DIR__.'/../../vendor/phpunit/phpunit/PHPUnit/Framework/Assert/Functions.php';
@@ -57,14 +58,22 @@ class FeatureContext extends BehatContext
      */
     public function iFillTheLastFieldWith($arg1, $arg2)
     {
-        throw new PendingException();
+        $elts = $this->getSession()->getPage()->findAll('named', array('field',  $this->fixStepArgument('"'.$arg1.'"')));
+        if (0 === count($elts)) {
+            throw new ResponseTextException("No '$arg1' field", $this->getSession());
+        }
+        $elts[count($elts) - 1]->fill($arg2);
     }
 
     /**
-     * @When /^I follow the last "([^"]*)" link$/
+     * @When /^I follow the last remove repository link$/
      */
-    public function iFollowTheLastLink($arg1)
+    public function iFollowTheLastRemoveRepositoryLink()
     {
-        throw new PendingException();
+        $elts = $this->getSession()->getPage()->findAll('css', '.repositories .repository .remove');
+        if (0 === count($elts)) {
+            throw new ResponseTextException("No remove repository link", $this->getSession());
+        }
+        $elts[count($elts) - 1]->click();
     }
 }
