@@ -1,20 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>{{ config.name }}<a href="{{ path('config_edit') }}">Edit configuration</a></h2>
+    <h2>
+        {{ config.name }}
+        <a class="btn" href="{{ path('config_edit') }}"><i class="icon icon-edit"></i> Edit configuration</a>
+    </h2>
     <h3>Repositories</h3>
-    <table class="repositories">
+    <table class="repositories table table-bordered">
         <thead>
             <tr>
                 <th>Type</th>
-                <th>Url</th>
+                <th>Params</th>
             </tr>
         </thead>
         <tbody>
             {% for repository in config.repositories %}
                 <tr class="repository">
                     <td>{{ repository.type }}</td>
-                    <td>{{ repository.url }}</td>
+                    <td>
+                        {% for key, param in repository.params %}
+                            <dl>
+                                <dt>{{ key }}</dt>
+                                <dd><pre>{{ param }}</pre></dd>
+                            </dl>
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

@@ -5,7 +5,7 @@ namespace SatisAdmin\Model;
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class Repository implements \JsonSerializable
+abstract class Repository implements \JsonSerializable
 {
     /**
      * @var string
@@ -47,6 +47,11 @@ class Repository implements \JsonSerializable
 
         return $this;
     }
+
+    /**
+     * @return string[]
+     */
+    abstract public function getParams();
 
     /**
      * @param string $type

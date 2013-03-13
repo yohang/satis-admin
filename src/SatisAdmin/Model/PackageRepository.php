@@ -45,4 +45,12 @@ class PackageRepository extends Repository
 
         return parent::fromArray($data);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParams()
+    {
+        return ['Package' => json_encode($this->getPackage(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)];
+    }
 }

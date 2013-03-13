@@ -45,4 +45,12 @@ class VcsRepository extends Repository
 
         return parent::fromArray($data);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getParams()
+    {
+        return ['URL' => $this->getUrl()];
+    }
 }
