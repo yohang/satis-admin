@@ -7,6 +7,7 @@
     <form method="POST" action="{{ path('config_update') }}" class="form form-horizontal" id="config-form">
         {{ form_row(form.name) }}
         {{ form_row(form.homepage) }}
+        {{ form_row(form.requireAll, { label: 'Require all' }) }}
 
         <fieldset class="repositories">
             <legend>Repositories</legend>
@@ -33,20 +34,20 @@
 {% endblock %}
 
 {% macro repository_form(form) %}
-    <div class="repository row" data-behavior="repository">
-        <div class="span4">
-            {{ form_row(form.type) }}
-        </div>
-        <div class="span4">
-            {{ form_row(form.url) }}
-        </div>
-        <div class="span4">
-            <a class="btn btn-danger remove" data-behavior="remove-repository">
-                <i class="icon icon-white icon-trash"></i>
-                <span class="hide">Remove repository</span>
-            </a>
-        </div>
-    </div>
+    <fieldset class="repository" data-behavior="repository">
+        {{ form_row(
+            form.type, { attr: {
+                'data-behavior': 'repository-type',
+                'data-route'   : path('retrieve_repository_form_fragment', { type: '__type__', 'index': '__index__' })
+            }}
+        ) }}
+        <div data-behavior="dynamic-fields">{{ form_rest(form.data) }}</div>
+
+        <a class="btn btn-danger remove" data-behavior="remove-repository">
+            <i class="icon icon-white icon-trash"></i>
+            <span class="hide">Remove repository</span>
+        </a>
+    </fieldset>
 {% endmacro %}
 
 {% macro render_prototype(form) %}

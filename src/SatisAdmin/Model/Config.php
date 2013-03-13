@@ -21,9 +21,14 @@ class Config implements \JsonSerializable
     protected $homepage;
 
     /**
+     * @var boolean
+     */
+    protected $requireAll;
+
+    /**
      * @var Repository[]
      */
-    protected $repositories = array();
+    protected $repositories = [];
 
     /**
      * @param string $homepage
@@ -84,6 +89,22 @@ class Config implements \JsonSerializable
     }
 
     /**
+     * @param boolean $requireAll
+     */
+    public function setRequireAll($requireAll)
+    {
+        $this->requireAll = $requireAll;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getRequireAll()
+    {
+        return $this->requireAll;
+    }
+
+    /**
      * @param Repository $repository
      */
     public function addRepository(Repository $repository)
@@ -108,11 +129,12 @@ class Config implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return array(
+        return [
             'name'         => $this->getName(),
             'homepage'     => $this->getHomepage(),
-            'repositories' => $this->getRepositories()
-        );
+            'require-all'  => $this->getRequireAll(),
+            'repositories' => $this->getRepositories(),
+        ];
     }
 
     /**
@@ -122,10 +144,11 @@ class Config implements \JsonSerializable
      */
     public function fromArray(array $data)
     {
-        $this->name     = $data['name'];
-        $this->homepage = $data['homepage'];
+        $this->name       = $data['name'];
+        $this->homepage   = $data['homepage'];
+        $this->requireAll = isset($data['require-all']) ? $data['require-all'] : false;
         foreach ($data['repositories'] as $repository) {
-            $this->addRepository((new Repository())->fromArray($repository));
+            $this->addRepository(Repository::create($repository['type'])->fromArray($repository));
         }
 
         return $this;

@@ -2,6 +2,7 @@
 
 namespace SatisAdmin\Form;
 
+use SatisAdmin\Form\DataTransformer\ArrayToJsonDataTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -9,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class ConfigType extends AbstractType
+class PackageRepositoryType extends AbstractType
 {
     /**
      * {@inheritDoc}
@@ -17,18 +18,8 @@ class ConfigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('homepage')
-            ->add('requireAll', 'checkbox', ['required' => false])
-            ->add(
-                'repositories',
-                'collection',
-                [
-                    'allow_add'    => true,
-                    'allow_delete' => true,
-                    'type'         => new RepositoryType,
-                ]
-            );
+            ->add('package', 'textarea', [])
+            ->get('package')->addViewTransformer(new ArrayToJsonDataTransformer);
     }
 
     /**
@@ -36,7 +27,7 @@ class ConfigType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'SatisAdmin\Model\Config']);
+        $resolver->setDefaults(['virtual' => true]);
     }
 
     /**
@@ -44,6 +35,6 @@ class ConfigType extends AbstractType
      */
     public function getName()
     {
-        return 'config';
+        return 'package_repository';
     }
 }

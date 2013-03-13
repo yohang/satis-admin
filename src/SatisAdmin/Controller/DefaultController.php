@@ -3,6 +3,8 @@
 namespace SatisAdmin\Controller;
 
 use SatisAdmin\Form\ConfigType;
+use SatisAdmin\Form\RepositoryType;
+use SatisAdmin\Model\Repository;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +24,12 @@ class DefaultController extends Controller
      */
     public function mount(ControllerCollection $controllers)
     {
-        $controllers->get('/', array($this, 'indexAction'))->bind('config_index');
-        $controllers->get('/edit', array($this, 'editAction'))->bind('config_edit');
-        $controllers->post('/edit', array($this, 'updateAction'))->bind('config_update');
+        $controllers->get('/', [$this, 'indexAction'])->bind('config_index');
+        $controllers->get('/edit', [$this, 'editAction'])->bind('config_edit');
+        $controllers->post('/edit', [$this, 'updateAction'])->bind('config_update');
+        $controllers
+            ->get('/repository/{type}/form-fragment/{index}', [$this, 'retrieveRepositoryFormFragmentAction'])
+            ->bind('retrieve_repository_form_fragment');
     }
 
     /**
@@ -32,12 +37,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render(
-            'default/index.html.twig',
-            array(
-                'config' => $this->getModelManager()->getConfig()
-            )
-        );
+        return $this->render('default/index.html.twig', ['config' => $this->getModelManager()->getConfig()]);
     }
 
     /**
@@ -45,7 +45,7 @@ class DefaultController extends Controller
      */
     public function editAction()
     {
-        return $this->render('default/edit.html.twig', array('form' => $this->getForm()->createView()));
+        return $this->render('default/edit.html.twig', ['form' => $this->getForm()->createView()]);
     }
 
     /**
@@ -63,7 +63,22 @@ class DefaultController extends Controller
             return $this->app->redirect($this->getRouter()->generate('config_index'));
         }
 
-        return $this->render('default/edit.html.twig', array('form' => $form->createView()));
+        return $this->render('default/edit.html.twig', ['form' => $form->createView()]);
+    }
+
+    public function retrieveRepositoryFormFragmentAction($type, $index)
+    {
+        $form = $this->getFormFactory()->createNamed('config');
+        $form->add($this->getFormFactory()->createNamed('repositories'));
+        $form['repositories']->add($this->getFormFactory()->createNamed($index, new RepositoryType));
+        $form['repositories'][$index]->setData(Repository::create($type));
+
+        return $this->render(
+            'default/retrieveRepositoryFormFragment.html.twig',
+            [
+                'form' => $form['repositories'][$index]->createView()
+            ]
+        );
     }
 
     /**

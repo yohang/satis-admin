@@ -13,11 +13,6 @@ class Repository implements \JsonSerializable
     protected $type;
 
     /**
-     * @var string
-     */
-    protected $url;
-
-    /**
      * @param string $type
      */
     public function setType($type)
@@ -34,30 +29,11 @@ class Repository implements \JsonSerializable
     }
 
     /**
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function jsonSerialize()
     {
-        return array(
-            'type' => $this->getType(),
-            'url'  => $this->getUrl(),
-        );
+        return ['type' => $this->getType()];
     }
 
     /**
@@ -68,8 +44,19 @@ class Repository implements \JsonSerializable
     public function fromArray(array $data)
     {
         $this->type = $data['type'];
-        $this->url  = $data['url'];
 
         return $this;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return Repository
+     */
+    public static function create($type)
+    {
+        $class = __NAMESPACE__.'\\'.ucfirst($type).'Repository';
+
+        return (new $class)->fromArray(['type' => $type]);
     }
 }
