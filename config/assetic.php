@@ -23,7 +23,8 @@ return array(
         $am->set('styles', new AssetCache(
             new GlobAsset(
                 array(
-                    $this['app.components_dir'].'/bootstrap/less/bootstrap.less'
+                    $this['app.components_dir'].'/bootstrap/less/bootstrap.less',
+                    $this['app.resources_dir'].'/less/global.less',
                 ),
                 array($fm->get('less'))
             ),

@@ -1,7 +1,7 @@
 /bin
 /cache
 /components
-/data/config.json
+/data/confi*.json
 /node_modules
 /vendor
 /web/css

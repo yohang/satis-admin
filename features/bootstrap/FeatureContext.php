@@ -27,6 +27,21 @@ class FeatureContext extends BehatContext
      */
     public function __construct(array $parameters)
     {
+        file_put_contents(
+            __DIR__.'/../../data/config_dev.json',
+            <<<JSON
+{
+    "name": "Test repository",
+    "homepage": "https://github.com/yohang",
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/yohang/CalendR.git" },
+        { "type": "vcs", "url": "https://github.com/yohang/Finite.git" },
+        { "type": "vcs", "url": "https://github.com/frequence-web/OOSSH.git" }
+    ]
+}
+
+JSON
+        );
     }
 
     /**
@@ -62,7 +77,8 @@ class FeatureContext extends BehatContext
         if (0 === count($elts)) {
             throw new ResponseTextException("No '$arg1' field", $this->getSession());
         }
-        $elts[count($elts) - 1]->fill($arg2);
+
+        $elts[count($elts) - 1]->setValue($arg2);
     }
 
     /**
@@ -75,5 +91,13 @@ class FeatureContext extends BehatContext
             throw new ResponseTextException("No remove repository link", $this->getSession());
         }
         $elts[count($elts) - 1]->click();
+    }
+
+    /**
+     * @When /^I follow the Add repository link$/
+     */
+    public function iFollowTheAddRepositoryLink()
+    {
+        $this->getSession()->getPage()->find('css', '[data-behavior="add-repository"]')->click();
     }
 }

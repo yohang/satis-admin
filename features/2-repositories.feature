@@ -6,7 +6,7 @@ Feature: Manage repository collection
     @javascript
     Scenario: Add a repository
         Given I am on "/edit"
-        When I follow "Add repository"
+        When I follow the Add repository link
         And I fill the last "Type" field with "vcs"
         And I fill the last "Url" field with "https://github.com/yohang/dependency-tools.git"
         And I press "Save"
