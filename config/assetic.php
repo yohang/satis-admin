@@ -2,12 +2,32 @@
 
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\AssetCollection;
+use Assetic\Asset\AssetInterface;
 use Assetic\Asset\GlobAsset;
 use Assetic\AssetManager;
 use Assetic\Cache\FilesystemCache;
 use Assetic\FilterManager;
 use Assetic\Filter\CoffeeScriptFilter;
+use Assetic\Filter\FilterInterface;
 use Assetic\Filter\LessFilter;
+
+class PathRewriteFilter implements FilterInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function filterLoad(AssetInterface $asset)
+    {
+        $asset->setContent(str_replace('../img/', '/img/', $asset->getContent()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function filterDump(AssetInterface $asset)
+    {
+    }
+}
 
 return array(
     'assetic.path_to_web' => $this['app.web_dir'],
