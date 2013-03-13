@@ -10,13 +10,12 @@ before_install:
     - sh -e /etc/init.d/xvfb start
     - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar
     - java -jar selenium-server-standalone-2.31.0.jar > /dev/null 2>&1 &
-    - sleep 15
 before_script:
     - sudo apt-get update -qq
     - sudo apt-get install nodejs
     - composer --dev install
-    - php -Slocalhost:8000 -tweb > /dev/null &
+    - php -Slocalhost:8000 -tweb > /dev/null 2>&1 &
 script:
     - node_modules/.bin/coffeelint -f config/ci/coffeelint.json -r resources/coffee
     - php -l src
-    - bin/behat -v
+    - bin/behat
