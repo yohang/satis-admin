@@ -17,4 +17,4 @@ before_script:
 script:
     - node_modules/.bin/coffeelint -f config/ci/coffeelint.json -r resources/coffee
     - php -l src
-    - bin/behat
+    - bin/behat -v
