@@ -26,6 +26,5 @@ Feature: Manage repository collection
             | type | url                                            |
             | vcs  | https://github.com/yohang/CalendR.git          |
             | vcs  | https://github.com/yohang/Finite.git           |
-            | vcs  | https://github.com/frequence-web/OOSSH.git     |
 
 
