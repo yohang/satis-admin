@@ -4,6 +4,7 @@
     "private": true,
     "dependencies": {
         "coffee-script": "*",
+        "coffeelint":    "*",
         "less":          "*",
         "bower":         "*"
     }

@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "57fe33d0f371a95232d74e64c5c559eeac77a24f"
+                "reference": "e69a05949bb83cff391bc261184d6a9483aa8bcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/57fe33d0f371a95232d74e64c5c559eeac77a24f",
-                "reference": "57fe33d0f371a95232d74e64c5c559eeac77a24f",
+                "url": "https://api.github.com/repos/composer/composer/zipball/e69a05949bb83cff391bc261184d6a9483aa8bcc",
+                "reference": "e69a05949bb83cff391bc261184d6a9483aa8bcc",
                 "shasum": ""
             },
             "require": {
@@ -115,7 +115,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2013-03-11 13:02:49"
+            "time": "2013-03-13 10:03:44"
         },
         {
             "name": "composer/satis",

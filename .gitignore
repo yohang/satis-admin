@@ -1,8 +1,9 @@
 /bin
-/cache
+/cache/*
 /components
 /data/confi*.json
 /node_modules
 /vendor
 /web/css
 /web/js
+!.gitkeep

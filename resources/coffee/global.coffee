@@ -1,6 +1,6 @@
 (($) ->
 
-    repositoryIndex = 0;
+    repositoryIndex = 0
 
     ###
         Parse all repository collection input names to find
@@ -8,7 +8,7 @@
     ###
     parseRepositoryIndex = ->
         index = parseInt($(@).attr('name').match(/^config\[repositories\]\[(\d+)\]/)[1])
-        repositoryIndex = Math.max(index + 1, repositoryIndex);
+        repositoryIndex = Math.max(index + 1, repositoryIndex)
 
     ###
         Remove a repository from the repository collection
