@@ -15,6 +15,6 @@ before_script:
     - composer --dev install
     - php -Slocalhost:8000 -tweb > /dev/null &
 script:
-    - node_modules/.bin -f config/ci/coffeelint.json -r resources/coffee
+    - node_modules/.bin/coffeelint -f config/ci/coffeelint.json -r resources/coffee
     - php -l src
     - bin/behat
