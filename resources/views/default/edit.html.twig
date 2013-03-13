@@ -14,10 +14,14 @@
                 {{ repository_form(repository) }}
             {% endfor %}
             <div data-behavior="new-repositories"></div>
-            <a class="btn btn-success" data-behavior="add-repository" data-prototype="{{ render_prototype(form) }}">
-                <i class="icon icon-plus"></i>
-                <span class="hide">Add repository</span>
-            </a>
+            <div class="row">
+                <div class="span4 offset8">
+                    <a class="btn btn-success" data-behavior="add-repository" data-prototype="{{ render_prototype(form) }}">
+                        <i class="icon icon-plus"></i>
+                        <span class="hide">Add repository</span>
+                    </a>
+                </div>
+            </div>
         </fieldset>
 
         {{ form_rest(form) }}
@@ -29,11 +33,14 @@
 {% endblock %}
 
 {% macro repository_form(form) %}
-    <div class="control-group repository" data-behavior="repository">
-        <div class="controls">
-            {{ form_widget(form.type) }}
-            {{ form_widget(form.url) }}
-
+    <div class="repository row" data-behavior="repository">
+        <div class="span4">
+            {{ form_row(form.type) }}
+        </div>
+        <div class="span4">
+            {{ form_row(form.url) }}
+        </div>
+        <div class="span4">
             <a class="btn btn-danger remove" data-behavior="remove-repository">
                 <i class="icon icon-white icon-delete"></i>
                 <span class="hide">Remove repository</span>
