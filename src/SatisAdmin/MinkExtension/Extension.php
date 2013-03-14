@@ -18,18 +18,18 @@ class Extension implements ExtensionInterface
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $container->setDefinition('satis_admin.app', new Definition('SatisAdmin\Application', array('test')));
+        $container->setDefinition('satis_admin.app', new Definition('SatisAdmin\Application', ['test']));
         $container->setDefinition(
             'browserkit.client',
-            new Definition('Symfony\Component\HttpKernel\Client', array(new Reference('satis_admin.app')))
+            new Definition('Symfony\Component\HttpKernel\Client', [new Reference('satis_admin.app')])
         );
         $container->setDefinition(
             'behat.mink.driver.browserkit',
-            new Definition('Behat\Mink\Driver\BrowserKitDriver', array(new Reference('browserkit.client')))
+            new Definition('Behat\Mink\Driver\BrowserKitDriver', [new Reference('browserkit.client')])
         );
 
-        $definition = new Definition('Behat\Mink\Session', array(new Reference('behat.mink.driver.browserkit')));
-        $definition->addTag('behat.mink.session', array('alias' => 'silex'));
+        $definition = new Definition('Behat\Mink\Session', [new Reference('behat.mink.driver.browserkit')]);
+        $definition->addTag('behat.mink.session', ['alias' => 'silex']);
         $container->setDefinition('behat.mink.session.silex', $definition);
     }
 
@@ -45,6 +45,6 @@ class Extension implements ExtensionInterface
      */
     public function getCompilerPasses()
     {
-        return array();
+        return [];
     }
 }

@@ -35,24 +35,6 @@ abstract class Controller implements ControllerProviderInterface
 
         return $controllers;
     }
-    /**
-     * @param string $template
-     * @param array  $params
-     *
-     * @return string
-     */
-    protected function render($template, array $params = array())
-    {
-        return $this->getTwig()->render($template, $params);
-    }
-
-    /**
-     * @return \Twig_Environment
-     */
-    protected function getTwig()
-    {
-        return $this->app['twig'];
-    }
 
     /**
      * @return \SatisAdmin\Model\ModelManager
@@ -68,13 +50,5 @@ abstract class Controller implements ControllerProviderInterface
     protected function getFormFactory()
     {
         return $this->app['form.factory'];
-    }
-
-    /**
-     * @return \Symfony\Component\Routing\Generator\UrlGenerator
-     */
-    protected function getRouter()
-    {
-        return $this->app['url_generator'];
     }
 }

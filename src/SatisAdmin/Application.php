@@ -6,6 +6,8 @@ use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
 use Silex\Application as BaseApplication;
+use Silex\Application\MonologTrait;
+use Silex\Application\TwigTrait;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
@@ -23,10 +25,12 @@ use SilexAssetic\AsseticExtension;
  */
 class Application extends BaseApplication
 {
+    use MonologTrait, TwigTrait;
+
     /**
      * {@inheritDoc}
      */
-    public function __construct($env, array $values = array())
+    public function __construct($env, array $values = [])
     {
         parent::__construct($values);
 
@@ -77,12 +81,12 @@ class Application extends BaseApplication
         $this->register(new ValidatorServiceProvider);
         $this->register(
             new TwigServiceProvider,
-            array(
+            [
                 'debug'               => $this['debug'],
                 'twig.path'           => $this['app.resources_dir'].'/views',
-                'twig.options'        => array('cache' => $this['app.cache_dir'].'/twig'),
-                'twig.form.templates' => array('form/form_div_layout.html.twig')
-            )
+                'twig.options'        => ['cache' => $this['app.cache_dir'].'/twig'],
+                'twig.form.templates' => ['form/form_div_layout.html.twig'],
+            ]
         );
         $this->register(new AsseticExtension, require $this['app.config_dir'].'/assetic.php');
         $this->register(new SecurityServiceProvider, require $this['app.config_dir'].'/security.php');
@@ -90,9 +94,9 @@ class Application extends BaseApplication
         if ($this['debug']) {
             $this->register(
                 $profiler = new WebProfilerServiceProvider,
-                array(
+                [
                     'profiler.cache_dir' => $this['app.cache_dir'].'/profiler',
-                )
+                ]
             );
             $this->mount('/_profiler', $profiler);
         }

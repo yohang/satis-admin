@@ -40,7 +40,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig', ['config' => $this->getModelManager()->getConfig()]);
+        return $this->app->render('default/index.html.twig', ['config' => $this->getModelManager()->getConfig()]);
     }
 
     /**
@@ -48,7 +48,7 @@ class DefaultController extends Controller
      */
     public function editAction()
     {
-        return $this->render('default/edit.html.twig', ['form' => $this->getForm()->createView()]);
+        return $this->app->render('default/edit.html.twig', ['form' => $this->getForm()->createView()]);
     }
 
     /**
@@ -67,9 +67,15 @@ class DefaultController extends Controller
             return $this->app->redirect($this->getRouter()->generate('config_index'));
         }
 
-        return $this->render('default/edit.html.twig', ['form' => $form->createView()]);
+        return $this->app->render('default/edit.html.twig', ['form' => $form->createView()]);
     }
 
+    /**
+     * @param string $type
+     * @param string $index
+     *
+     * @return string
+     */
     public function retrieveRepositoryFormFragmentAction($type, $index)
     {
         $form = $this->getFormFactory()->createNamed('config');
@@ -77,7 +83,7 @@ class DefaultController extends Controller
         $form['repositories']->add($this->getFormFactory()->createNamed($index, new RepositoryType));
         $form['repositories'][$index]->setData(Repository::create($type));
 
-        return $this->render(
+        return $this->app->render(
             'default/retrieveRepositoryFormFragment.html.twig',
             [
                 'form' => $form['repositories'][$index]->createView()

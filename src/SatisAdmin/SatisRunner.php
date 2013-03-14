@@ -46,13 +46,13 @@ class SatisRunner
         $configFile = tempnam(sys_get_temp_dir(), 'satis-admin');
         file_put_contents($configFile, $this->manager->getJson());
         $process = ProcessBuilder::create(
-            array(
+            [
                 'php',
                 $this->binDir.'/satis',
                 'build',
                 $configFile,
                 $this->outputDir
-            )
+            ]
         )->getProcess();
         $process->run();
     }
