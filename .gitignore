@@ -1,4 +1,4 @@
-/bin
+/bin/*
 /cache/*
 /components
 /config/users.json
@@ -11,3 +11,4 @@
 /web/packages.json
 /web/js
 !.gitkeep
+!bin/console
