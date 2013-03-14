@@ -55,6 +55,8 @@ class ModelManager
      */
     public function getJson()
     {
-        return $this->filesystem->get($this->configFile, true)->getContent();
+        return $this->filesystem->has($this->configFile) ?
+            $this->filesystem->get($this->configFile, true)->getContent() :
+            '{}';
     }
 }

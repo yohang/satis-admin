@@ -64,7 +64,16 @@ class SatisRunner
         )->getProcess();
 
         $this->logger->addInfo('Building config...');
-        $process->run();
-        $this->logger->addInfo('Config built.');
+        if (0 === $process->run()) {
+            $this->logger->addInfo('Config built.');
+        } else {
+            $this->logger->addError(
+                'Config not build',
+                [
+                    'stdout' => $process->getOutput(),
+                    'stderr' => $process->getErrorOutput()
+                ]
+            );
+        }
     }
 }

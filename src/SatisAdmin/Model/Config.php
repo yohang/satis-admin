@@ -144,9 +144,14 @@ class Config implements \JsonSerializable
      */
     public function fromArray(array $data)
     {
-        $this->name       = $data['name'];
-        $this->homepage   = $data['homepage'];
+        $this->name       = isset($data['name']) ? $data['name'] : '';
+        $this->homepage   = isset($data['homepage']) ? $data['homepage'] : '';
         $this->requireAll = isset($data['require-all']) ? $data['require-all'] : false;
+        
+        if (!isset($data['repositories'])) {
+            return $this;
+        }
+
         foreach ($data['repositories'] as $repository) {
             $this->addRepository(Repository::create($repository['type'])->fromArray($repository));
         }

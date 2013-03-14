@@ -9,6 +9,7 @@
         "monolog/monolog":                "1.4.*",
         "silex/silex":                    "1.0.*@dev",
         "silex/web-profiler":             "1.0.*@dev",
+        "symfony/config":                 "2.2.*",
         "symfony/console":                "2.2.*",
         "symfony/form":                   "2.2.*",
         "symfony/process":                "2.2.*",

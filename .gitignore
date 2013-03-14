@@ -6,9 +6,7 @@
 /logs/*.log
 /node_modules
 /vendor
-/web/css
 /web/index.html
 /web/packages.json
-/web/js
 !.gitkeep
 !bin/console
