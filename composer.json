@@ -6,6 +6,7 @@
         "composer/composer":              "1.0.*@dev",
         "composer/satis":                 "dev-master@dev",
         "mheap/silex-assetic":            "*@dev",
+        "monolog/monolog":                "1.4.*",
         "silex/silex":                    "1.0.*@dev",
         "silex/web-profiler":             "1.0.*@dev",
         "symfony/console":                "2.2.*",

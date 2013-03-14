@@ -3,6 +3,7 @@
 /components
 /config/users.json
 /data/confi*.json
+/logs/*.log
 /node_modules
 /vendor
 /web/css

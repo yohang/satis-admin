@@ -2,14 +2,14 @@
 
 namespace SatisAdmin\Console;
 
-use Symfony\Component\Console\Command\Command;
+use Monolog\Logger;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class BuildCommand extends Command
+class BuildCommand extends BaseCommand
 {
     /**
      * {@inheritDoc}
@@ -26,6 +26,7 @@ class BuildCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->getApp()->log('Building from command line', [], Logger::INFO);
         $this->getApplication()->getApplication()['satis_runner']->run();
     }
 }

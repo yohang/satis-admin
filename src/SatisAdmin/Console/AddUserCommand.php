@@ -2,7 +2,7 @@
 
 namespace SatisAdmin\Console;
 
-use Symfony\Component\Console\Command\Command;
+use Monolog\Logger;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\User;
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class AddUserCommand extends Command
+class AddUserCommand extends BaseCommand
 {
     protected function configure()
     {
@@ -24,20 +24,16 @@ class AddUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $application = $this->getApplication()->getApplication();
-        $users       = file_exists($application['app.users_file']) ?
-            json_decode(file_get_contents($application['app.users_file']), true) :
-            [];
-        $user        = new User($input->getArgument('username'), $input->getArgument('password'));
+        $app   = $this->getApp();
+        $user  = new User($input->getArgument('username'), $input->getArgument('password'));
+        $users = is_file($app['app.users_file']) ? json_decode(file_get_contents($app['app.users_file']), true) : [];
 
         $users[$input->getArgument('username')] = [
             'ROLE_USER',
-            $application['security.encoder_factory']->getEncoder($user)->encodePassword(
-                $input->getArgument('password'),
-                $user->getSalt()
-            )
+            $app->encodePassword($user, $input->getArgument('password'))
         ];
+        file_put_contents($app['app.users_file'], json_encode($users, JSON_PRETTY_PRINT));
 
-        file_put_contents($application['app.users_file'], json_encode($users, JSON_PRETTY_PRINT));
+        $app->log('User added', ['user' => $user->getUsername()], Logger::INFO);
     }
 }

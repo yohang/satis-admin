@@ -3,12 +3,15 @@
 namespace SatisAdmin;
 
 use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
+use Monolog\Logger;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
 use Silex\Application as BaseApplication;
 use Silex\Application\MonologTrait;
+use Silex\Application\SecurityTrait;
 use Silex\Application\TwigTrait;
 use Silex\Provider\FormServiceProvider;
+use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
@@ -25,7 +28,7 @@ use SilexAssetic\AsseticExtension;
  */
 class Application extends BaseApplication
 {
-    use MonologTrait, TwigTrait;
+    use MonologTrait, SecurityTrait, TwigTrait;
 
     /**
      * {@inheritDoc}
@@ -43,12 +46,14 @@ class Application extends BaseApplication
 
     protected function registerConfig($env)
     {
+        $this['env']                = $env;
         $this['app.root_dir']       = realpath(__DIR__.'/../..');
         $this['app.cache_dir']      = $this['app.root_dir'].'/cache';
         $this['app.bin_dir']        = $this['app.root_dir'].'/bin';
         $this['app.config_dir']     = $this['app.root_dir'].'/config';
         $this['app.components_dir'] = $this['app.root_dir'].'/components';
         $this['app.data_dir']       = $this['app.root_dir'].'/data';
+        $this['app.logs_dir']       = $this['app.root_dir'].'/logs';
         $this['app.resources_dir']  = $this['app.root_dir'].'/resources';
         $this['app.web_dir']        = $this['app.root_dir'].'/web';
         $this['app.users_file']     = $this['app.config_dir'].'/users.json';
@@ -62,7 +67,7 @@ class Application extends BaseApplication
             return new ModelManager($this['gaufrette.filesystem'], $this['satis.config_file']);
         });
         $this['satis_runner'] = $this->share(function() {
-            return new SatisRunner($this['model_manager'], $this['app.web_dir'], $this['app.bin_dir']);
+            return new SatisRunner($this['model_manager'], $this['monolog'], $this['app.web_dir'], $this['app.bin_dir']);
         });
     }
 
@@ -75,6 +80,8 @@ class Application extends BaseApplication
     {
         $this->register(new FormServiceProvider);
         $this->register(new GaufretteServiceProvider);
+        $this->register(new MonologServiceProvider, require $this['app.config_dir'].'/monolog.php');
+        $this->register(new SecurityServiceProvider, require $this['app.config_dir'].'/security.php');
         $this->register(new ServiceControllerServiceProvider);
         $this->register(new TranslationServiceProvider);
         $this->register(new UrlGeneratorServiceProvider);
@@ -89,7 +96,6 @@ class Application extends BaseApplication
             ]
         );
         $this->register(new AsseticExtension, require $this['app.config_dir'].'/assetic.php');
-        $this->register(new SecurityServiceProvider, require $this['app.config_dir'].'/security.php');
 
         if ($this['debug']) {
             $this->register(
@@ -105,6 +111,7 @@ class Application extends BaseApplication
     protected function bindEvents()
     {
         $this['dispatcher']->addListener(Events::CONFIG_SAVED, function() {
+            $this->log('Config saved', [], Logger::INFO);
             $this['satis_runner']->run();
         });
     }

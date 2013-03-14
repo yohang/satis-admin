@@ -2,16 +2,15 @@
 
 namespace SatisAdmin\Console;
 
-use Symfony\Component\Console\Command\Command;
+use Monolog\Logger;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Security\Core\User\User;
 
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class RemoveUserCommand extends Command
+class RemoveUserCommand extends BaseCommand
 {
     protected function configure()
     {
@@ -23,11 +22,12 @@ class RemoveUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $application = $this->getApplication()->getApplication();
-        $users       = json_decode(file_get_contents($application['app.users_file']), true);
+        $app   = $this->getApp();
+        $users = json_decode(file_get_contents($app['app.users_file']), true);
 
         unset($users[$input->getArgument('username')]);
 
-        file_put_contents($application['app.users_file'], json_encode($users, JSON_PRETTY_PRINT));
+        file_put_contents($app['app.users_file'], json_encode($users, JSON_PRETTY_PRINT));
+        $app->log('User removed', ['user' => $input->getArgument('username')], Logger::INFO);
     }
 }
