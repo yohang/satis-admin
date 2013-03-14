@@ -2,6 +2,7 @@
 /cache/*
 /components
 /config/users.json
+/composer.phar
 /data/confi*.json
 /logs/*.log
 /node_modules

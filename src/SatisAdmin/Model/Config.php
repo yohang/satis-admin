@@ -147,7 +147,7 @@ class Config implements \JsonSerializable
         $this->name       = isset($data['name']) ? $data['name'] : '';
         $this->homepage   = isset($data['homepage']) ? $data['homepage'] : '';
         $this->requireAll = isset($data['require-all']) ? $data['require-all'] : false;
-        
+
         if (!isset($data['repositories'])) {
             return $this;
         }

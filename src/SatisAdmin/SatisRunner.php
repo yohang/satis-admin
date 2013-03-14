@@ -63,7 +63,7 @@ class SatisRunner
             ]
         )->getProcess();
 
-        $this->logger->addInfo('Building config...');
+        $this->logger->addInfo('Building config...', ['command-line' => $process->getCommandLine()]);
         if (0 === $process->run()) {
             $this->logger->addInfo('Config built.');
         } else {
