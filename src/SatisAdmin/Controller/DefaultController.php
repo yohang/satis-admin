@@ -32,6 +32,7 @@ class DefaultController extends Controller
         $controllers
             ->get('/repository/{type}/form-fragment/{index}', [$this, 'retrieveRepositoryFormFragmentAction'])
             ->bind('retrieve_repository_form_fragment');
+        $controllers->post('/config/build', [$this, 'buildAction'])->bind('config_build');
     }
 
     /**
@@ -82,6 +83,16 @@ class DefaultController extends Controller
                 'form' => $form['repositories'][$index]->createView()
             ]
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function buildAction()
+    {
+        $this->app['satis_runner']->run();
+
+        return json_encode(['status' => 'ok']);
     }
 
     /**
