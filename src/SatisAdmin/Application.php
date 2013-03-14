@@ -3,6 +3,7 @@
 namespace SatisAdmin;
 
 use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
+use Composer\Satis\Command\BuildCommand;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
 use Silex\Application as BaseApplication;
@@ -33,12 +34,14 @@ class Application extends BaseApplication
         $this->registerProviders();
         $this->registerServices();
         $this->registerControllers();
+        $this->bindEvents();
     }
 
     protected function registerConfig($env)
     {
         $this['app.root_dir']       = realpath(__DIR__.'/../..');
         $this['app.cache_dir']      = $this['app.root_dir'].'/cache';
+        $this['app.bin_dir']        = $this['app.root_dir'].'/bin';
         $this['app.config_dir']     = $this['app.root_dir'].'/config';
         $this['app.components_dir'] = $this['app.root_dir'].'/components';
         $this['app.data_dir']       = $this['app.root_dir'].'/data';
@@ -52,6 +55,12 @@ class Application extends BaseApplication
     {
         $this['model_manager'] = $this->share(function() {
             return new ModelManager($this['gaufrette.filesystem'], $this['satis.config_file']);
+        });
+        $this['satis.build_command'] = $this->share(function() {
+            return new BuildCommand;
+        });
+        $this['satis_runner'] = $this->share(function() {
+            return new SatisRunner($this['model_manager'], $this['app.web_dir'], $this['app.bin_dir']);
         });
     }
 
@@ -88,5 +97,12 @@ class Application extends BaseApplication
             );
             $this->mount('/_profiler', $profiler);
         }
+    }
+
+    protected function bindEvents()
+    {
+        $this['dispatcher']->addListener(Events::CONFIG_SAVED, function() {
+            $this['satis_runner']->run();
+        });
     }
 }

@@ -2,6 +2,8 @@
 
 namespace SatisAdmin\Controller;
 
+use SatisAdmin\Event\ConfigSavedEvent;
+use SatisAdmin\Events;
 use SatisAdmin\Form\ConfigType;
 use SatisAdmin\Form\RepositoryType;
 use SatisAdmin\Model\Repository;
@@ -59,6 +61,7 @@ class DefaultController extends Controller
         $form->bind($request);
         if ($form->isValid()) {
             $this->getModelManager()->persist($form->getData());
+            $this->app['dispatcher']->dispatch(Events::CONFIG_SAVED, new ConfigSavedEvent($form->getData()));
 
             return $this->app->redirect($this->getRouter()->generate('config_index'));
         }

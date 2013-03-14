@@ -36,7 +36,7 @@ class ModelManager
     {
         return (new Config)->fromArray(
             json_decode(
-                $this->filesystem->get($this->configFile, true)->getContent(),
+                $this->getJson(),
                 true
             )
         );
@@ -48,5 +48,13 @@ class ModelManager
     public function persist(Config $config)
     {
         $this->filesystem->write($this->configFile, json_encode($config), true);
+    }
+
+    /**
+     * @return string
+     */
+    public function getJson()
+    {
+        return $this->filesystem->get($this->configFile, true)->getContent();
     }
 }
