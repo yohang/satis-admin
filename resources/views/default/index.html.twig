@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2 id="homepage-heading">
-        {{ config.name }}
-        <a class="btn" href="{{ path('config_edit') }}"><i class="icon icon-edit"></i> Edit configuration</a>
-        <a class="btn btn-warning" href="{{ path('config_build') }}" data-behavior="build-button">
-            <i class="icon icon-share icon-white"></i> Build
-        </a>
-    </h2>
+    <div class="page-header">
+        <h2>
+            {{ config.name }}
+            <small><a href="{{ config.homepage }}" target="_blank"><i class="icon icon-share"> </i></a></small>
+        </h2>
+    </div>
+    <a class="btn" href="{{ path('config_edit') }}"><i class="icon icon-edit"></i> Edit configuration</a>
+    <a class="btn btn-warning" href="{{ path('config_build') }}" data-behavior="build-button">
+        <i class="icon icon-share icon-white"></i> Build
+    </a>
     <h3>Repositories</h3>
     <table class="repositories table table-bordered">
         <thead>

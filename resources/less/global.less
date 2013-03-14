@@ -9,8 +9,10 @@
     }
 }
 .loading {
-    background-image:    url(/ajax-loader.gif) !important;
-    background-position: 4px 4px;
-    background-repeat:   no-repeat;
-    padding-left:        24px;
+    &:before {
+        content:    url(/ajax-loader.gif);
+        display:    inline-block;
+        height:     16px;
+        width:      16px;
+    }
 }

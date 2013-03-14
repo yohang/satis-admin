@@ -10,6 +10,7 @@ use Silex\Application as BaseApplication;
 use Silex\Application\MonologTrait;
 use Silex\Application\SecurityTrait;
 use Silex\Application\TwigTrait;
+use Silex\Application\UrlGeneratorTrait;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -28,7 +29,7 @@ use SilexAssetic\AsseticExtension;
  */
 class Application extends BaseApplication
 {
-    use MonologTrait, SecurityTrait, TwigTrait;
+    use MonologTrait, SecurityTrait, TwigTrait, UrlGeneratorTrait;
 
     /**
      * {@inheritDoc}

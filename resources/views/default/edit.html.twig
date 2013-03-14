@@ -3,7 +3,7 @@
 {% from _self import repository_form %}
 
 {% block body %}
-    <h2>Edit configuration</h2>
+    <div class="page-header"><h2>Edit configuration</h2></div>
     <form method="POST" action="{{ path('config_update') }}" class="form form-horizontal" id="config-form">
         {{ form_row(form.name) }}
         {{ form_row(form.homepage) }}
@@ -18,8 +18,7 @@
             <div class="row">
                 <div class="span4 offset8">
                     <a class="btn btn-success" data-behavior="add-repository" data-prototype="{{ render_prototype(form) }}">
-                        <i class="icon icon-plus icon-white"></i>
-                        <span class="hide">Add repository</span>
+                        <i class="icon icon-plus icon-white"></i> Add repository
                     </a>
                 </div>
             </div>
@@ -28,25 +27,31 @@
         {{ form_rest(form) }}
 
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn" href="{{ path('config_index') }}"><i class="icon-remove"></i> Cancel</a>
+            <button type="submit" class="btn btn-primary"><i class="icon icon-edit icon-white"></i> Save</button>
         </div>
     </form>
 {% endblock %}
 
 {% macro repository_form(form) %}
     <fieldset class="repository" data-behavior="repository">
-        {{ form_row(
-            form.type, { attr: {
-                'data-behavior': 'repository-type',
-                'data-route'   : path('retrieve_repository_form_fragment', { type: '__type__', 'index': '__index__' })
-            }}
-        ) }}
-        <div data-behavior="dynamic-fields">{{ form_rest(form.data) }}</div>
-
-        <a class="btn btn-danger remove" data-behavior="remove-repository">
-            <i class="icon icon-white icon-trash"></i>
-            <span class="hide">Remove repository</span>
-        </a>
+        <div class="row">
+            <div class="span2">
+                <a class="btn btn-danger remove" data-behavior="remove-repository">
+                    <i class="icon icon-white icon-trash"></i> Remove
+                </a>
+            </div>
+            <div class="span10">
+                {{ form_row(
+                    form.type, { attr: {
+                        'data-behavior': 'repository-type',
+                        'data-route'   : path('retrieve_repository_form_fragment', { type: '__type__', 'index': '__index__' })
+                    }}
+                ) }}
+                <div data-behavior="dynamic-fields">{{ form_rest(form.data) }}</div>
+            </div>
+        </div>
+        <hr />
     </fieldset>
 {% endmacro %}
 

@@ -64,7 +64,7 @@ class DefaultController extends Controller
             $this->getModelManager()->persist($form->getData());
             $this->app['dispatcher']->dispatch(Events::CONFIG_SAVED, new ConfigSavedEvent($form->getData()));
 
-            return $this->app->redirect($this->getRouter()->generate('config_index'));
+            return $this->app->redirect($this->app->path('config_index'));
         }
 
         return $this->app->render('default/edit.html.twig', ['form' => $form->createView()]);

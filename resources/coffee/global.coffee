@@ -43,7 +43,8 @@
         $.post($this.attr('href'), -> $this.removeClass('disabled loading'))
 
     $ ->
-        $('#homepage-heading')
+        (new Image()).src = '/ajax-loader.gif'
+        $('.container')
             .on('click', '[data-behavior=build-button]', triggerBuild)
 
         $('#config-form')
