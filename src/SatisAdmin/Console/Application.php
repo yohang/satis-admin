@@ -49,7 +49,14 @@ class Application extends BaseApplication
      */
     protected function getDefaultCommands()
     {
-        return array_merge(parent::getDefaultCommands(), [new BuildCommand]);
+        return array_merge(
+            parent::getDefaultCommands(),
+            [
+                new BuildCommand,
+                new AddUserCommand,
+                new RemoveUserCommand,
+            ]
+        );
     }
 
     /**

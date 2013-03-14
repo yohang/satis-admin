@@ -8,7 +8,11 @@
         "mheap/silex-assetic":            "*@dev",
         "silex/silex":                    "1.0.*@dev",
         "silex/web-profiler":             "1.0.*@dev",
+        "symfony/console":                "2.2.*",
         "symfony/form":                   "2.2.*",
+        "symfony/process":                "2.2.*",
+        "symfony/security":               "2.2.*",
+        "symfony/translation":            "2.2.*",
         "symfony/validator":              "2.2.*",
         "yohang/dependency-tools":        "1.0.*"
     },
@@ -18,7 +22,7 @@
         "behat/mink-extension":         "1.0.*",
         "behat/mink-browserkit-driver": "1.0.*",
         "behat/mink-selenium2-driver":  "1.0.*",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit":              "3.7.*"
     },
 
     "config": {
@@ -42,7 +46,7 @@
 
     "extra": {
         "dependency-tools": {
-            "npm": true,
+            "npm":   true,
             "bower": true
         }
     }

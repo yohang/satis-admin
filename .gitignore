@@ -1,6 +1,7 @@
 /bin
 /cache/*
 /components
+/config/users.json
 /data/confi*.json
 /node_modules
 /vendor

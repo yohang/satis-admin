@@ -3,11 +3,11 @@
 namespace SatisAdmin;
 
 use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
-use Composer\Satis\Command\BuildCommand;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
 use Silex\Application as BaseApplication;
 use Silex\Provider\FormServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TranslationServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -47,6 +47,7 @@ class Application extends BaseApplication
         $this['app.data_dir']       = $this['app.root_dir'].'/data';
         $this['app.resources_dir']  = $this['app.root_dir'].'/resources';
         $this['app.web_dir']        = $this['app.root_dir'].'/web';
+        $this['app.users_file']     = $this['app.config_dir'].'/users.json';
 
         require sprintf('%s/%s.php', $this['app.config_dir'], $env);
     }
@@ -55,9 +56,6 @@ class Application extends BaseApplication
     {
         $this['model_manager'] = $this->share(function() {
             return new ModelManager($this['gaufrette.filesystem'], $this['satis.config_file']);
-        });
-        $this['satis.build_command'] = $this->share(function() {
-            return new BuildCommand;
         });
         $this['satis_runner'] = $this->share(function() {
             return new SatisRunner($this['model_manager'], $this['app.web_dir'], $this['app.bin_dir']);
@@ -87,6 +85,7 @@ class Application extends BaseApplication
             )
         );
         $this->register(new AsseticExtension, require $this['app.config_dir'].'/assetic.php');
+        $this->register(new SecurityServiceProvider, require $this['app.config_dir'].'/security.php');
 
         if ($this['debug']) {
             $this->register(
