@@ -29,3 +29,10 @@ Installation
 
 ```
 
+Run test suite
+--------------
+
+```sh
+ $ php composer.phar install --dev
+ $ ./bin/behat
+```
