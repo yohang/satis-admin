@@ -1,6 +1,6 @@
 {
     "name": "yohang/satis-admin",
-
+    "keywords": ["satis", "interface", "composer", "silex"],
     "require": {
         "bt51/gaufrette-serviceprovider": "1.0.*",
         "composer/composer":              "1.0.*@dev",
