@@ -21,6 +21,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
 use SilexAssetic\AsseticExtension;
+use SilexAssetic\AsseticServiceProvider;
 
 /**
  * The Application.
@@ -96,7 +97,7 @@ class Application extends BaseApplication
                 'twig.form.templates' => ['form/form_div_layout.html.twig'],
             ]
         );
-        $this->register(new AsseticExtension, require $this['app.config_dir'].'/assetic.php');
+        $this->register(new AsseticServiceProvider, require $this['app.config_dir'].'/assetic.php');
 
         if ($this['debug']) {
             $this->register(
