@@ -1,5 +1,9 @@
 <?php
 
+if (!is_file($this['app.users_file'])) {
+    file_put_contents($this['app.users_file'], json_encode([]));
+}
+
 return [
     'security.firewalls' => [
         'admin' => [
