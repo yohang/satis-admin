@@ -1,6 +1,8 @@
 {
     "name": "yohang/satis-admin",
+    "description": "A simple web-based interface for Satis repositories",
     "keywords": ["satis", "interface", "composer", "silex"],
+    "license": "MIT",
     "require": {
         "bt51/gaufrette-serviceprovider": "1.0.*",
         "composer/composer":              "1.0.*@dev",
@@ -50,7 +52,7 @@
 
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.*"
+            "dev-master": "1.0.*-dev"
         },
         "dependency-tools": {
             "npm":   true,
