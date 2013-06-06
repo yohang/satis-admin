@@ -1,19 +1,15 @@
 <?php
 
-namespace SatisAdmin;
+namespace SatisAdmin\Runner;
 
-use Composer\Console\Application as ConsoleApplication;
-use Composer\Satis\Command\BuildCommand;
 use Monolog\Logger;
 use SatisAdmin\Model\ModelManager;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * @author Yohan Giarelli <yohan@frequence-web.fr>
  */
-class SatisRunner
+class SatisRunner implements RunnerInterface
 {
     /**
      * @var ModelManager

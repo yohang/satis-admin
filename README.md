@@ -34,5 +34,6 @@ Run test suite
 
 ```sh
  $ php composer.phar install --dev
+ $ php -Slocalhost:8000 -tweb
  $ ./bin/behat
 ```

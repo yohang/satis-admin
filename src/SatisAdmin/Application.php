@@ -6,6 +6,7 @@ use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
 use Monolog\Logger;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
+use SatisAdmin\Runner\SatisRunner;
 use Silex\Application as BaseApplication;
 use Silex\Application\MonologTrait;
 use Silex\Application\SecurityTrait;
@@ -20,7 +21,6 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
-use SilexAssetic\AsseticExtension;
 use SilexAssetic\AsseticServiceProvider;
 
 /**
@@ -67,9 +67,6 @@ class Application extends BaseApplication
     {
         $this['model_manager'] = $this->share(function() {
             return new ModelManager($this['gaufrette.filesystem'], $this['satis.config_file']);
-        });
-        $this['satis_runner'] = $this->share(function() {
-            return new SatisRunner($this['model_manager'], $this['monolog'], $this['app.web_dir'], $this['app.bin_dir']);
         });
     }
 
