@@ -162,7 +162,7 @@ class Config implements \JsonSerializable
     /**
      * @param ClassMetadata $metadata
      */
-    static public function loadValidatorMetadata(ClassMetadata $metadata)
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('name', new Assert\NotBlank);
         $metadata->addPropertyConstraint('homepage', new Assert\NotBlank);

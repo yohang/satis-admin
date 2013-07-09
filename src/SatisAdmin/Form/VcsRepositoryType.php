@@ -21,7 +21,6 @@ class VcsRepositoryType extends AbstractType
         $resolver->setDefaults(['virtual' => true]);
     }
 
-
     /**
      * {@inheritDoc}
      */

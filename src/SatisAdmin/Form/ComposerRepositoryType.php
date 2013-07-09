@@ -21,7 +21,6 @@ class ComposerRepositoryType extends AbstractType
         $resolver->setDefaults(['virtual' => true]);
     }
 
-
     /**
      * {@inheritDoc}
      */

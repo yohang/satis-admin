@@ -23,7 +23,6 @@ class PearRepositoryType extends AbstractType
         $resolver->setDefaults(['virtual' => true]);
     }
 
-
     /**
      * {@inheritDoc}
      */

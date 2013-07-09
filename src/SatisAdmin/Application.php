@@ -6,7 +6,6 @@ use Bt51\Silex\Provider\GaufretteServiceProvider\GaufretteServiceProvider;
 use Monolog\Logger;
 use SatisAdmin\Controller\DefaultController;
 use SatisAdmin\Model\ModelManager;
-use SatisAdmin\Runner\SatisRunner;
 use Silex\Application as BaseApplication;
 use Silex\Application\MonologTrait;
 use Silex\Application\SecurityTrait;
