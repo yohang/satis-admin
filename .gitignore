@@ -1,6 +1,6 @@
 /bin/*
 /cache/*
-/components
+/bower_components
 /config/users.json
 /composer.phar
 /data/confi*.json

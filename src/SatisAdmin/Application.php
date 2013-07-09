@@ -53,7 +53,7 @@ class Application extends BaseApplication
         $this['app.cache_dir']      = $this['app.root_dir'].'/cache';
         $this['app.bin_dir']        = $this['app.root_dir'].'/bin';
         $this['app.config_dir']     = $this['app.root_dir'].'/config';
-        $this['app.components_dir'] = $this['app.root_dir'].'/components';
+        $this['app.components_dir'] = $this['app.root_dir'].'/bower_components';
         $this['app.data_dir']       = $this['app.root_dir'].'/data';
         $this['app.logs_dir']       = $this['app.root_dir'].'/logs';
         $this['app.resources_dir']  = $this['app.root_dir'].'/resources';
