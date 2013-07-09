@@ -9,7 +9,7 @@
         "composer/satis":                 "dev-master@dev",
         "mheap/silex-assetic":            "1.0.*@dev",
         "monolog/monolog":                "1.5.*",
-        "silex/silex":                    "1.0.*",
+        "silex/silex":                    "1.1.*",
         "silex/web-profiler":             "1.0.*",
         "symfony/config":                 ">=2.2,<3.0",
         "symfony/console":                ">=2.2,<3.0",
