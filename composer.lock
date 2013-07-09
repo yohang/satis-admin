@@ -1425,17 +1425,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.2.3",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "v2.2.3"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/v2.2.3",
-                "reference": "v2.2.3",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -1444,7 +1444,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -1468,7 +1468,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-13 15:57:04"
+            "time": "2013-05-06 20:03:44"
         },
         {
             "name": "symfony/property-access",
@@ -1989,21 +1989,21 @@
         },
         {
             "name": "yohang/dependency-tools",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yohang/dependency-tools.git",
-                "reference": "1.0.1"
+                "url": "https://github.com/yohang/dependency-tools.git",
+                "reference": "1.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/yohang/dependency-tools/zipball/1.0.1",
-                "reference": "1.0.1",
+                "url": "https://api.github.com/repos/yohang/dependency-tools/zipball/1.0.2",
+                "reference": "1.0.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "symfony/process": ">=2.0,<2.3-dev"
+                "symfony/process": ">=2.0,<3.0"
             },
             "type": "library",
             "autoload": {
@@ -2030,7 +2030,7 @@
                 "dependency",
                 "npm"
             ],
-            "time": "2012-10-27 06:01:34"
+            "time": "2013-07-09 08:57:03"
         }
     ],
     "packages-dev": [
