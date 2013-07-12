@@ -2,52 +2,39 @@
 
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\AssetCollection;
-use Assetic\Asset\AssetInterface;
+use Assetic\Asset\FileAsset;
 use Assetic\Asset\GlobAsset;
 use Assetic\AssetManager;
 use Assetic\Cache\FilesystemCache;
 use Assetic\FilterManager;
 use Assetic\Filter\CoffeeScriptFilter;
-use Assetic\Filter\FilterInterface;
 use Assetic\Filter\LessFilter;
+use Assetic\Filter\UglifyJs2Filter;
+use SatisAdmin\Application;
 
-class PathRewriteFilter implements FilterInterface
-{
-    /**
-     * {@inheritDoc}
-     */
-    public function filterLoad(AssetInterface $asset)
-    {
-        $asset->setContent(str_replace('../img/', '/img/', $asset->getContent()));
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function filterDump(AssetInterface $asset)
-    {
-    }
-}
+$this['assetic.filter_manager'] = $this->share(
+    $this->extend('assetic.filter_manager', function(FilterManager $fm) {
+        $lessFilter = new LessFilter($this['app.node_path'], array(__DIR__ . '/../node_modules'));
 
-return array(
-    'assetic.path_to_web' => $this['app.web_dir'],
-    'assetic.options' => array(
-        'debug'            => $this['debug'],
-        'auto_dump_assets' => $this['debug'],
-    ),
-    'assetic.filters' => $this->protect(function(FilterManager $fm) {
-        $fm->set('less', new LessFilter($this['app.node_path'], array(__DIR__.'/../node_modules')));
+        $fm->set('less', $lessFilter);
         $fm->set('coffee', new CoffeeScriptFilter(__DIR__.'/../node_modules/.bin/coffee', $this['app.node_path']));
-    }),
-    'assetic.assets' => $this->protect(function(AssetManager $am, FilterManager $fm) {
+
+        if (!$this['debug']) {
+            $lessFilter->setCompress(true);
+            $fm->set('uglify_js', new UglifyJs2Filter(__DIR__.'/../node_modules/.bin/uglifyjs', $this['app.node_path']));
+        }
+
+        return $fm;
+    })
+);
+
+$this['assetic.asset_manager'] = $this->share(
+    $this->extend('assetic.asset_manager', function(AssetManager $am, Application $app) {
+        $fm = $this['assetic.filter_manager'];
+
         $am->set('styles', new AssetCache(
-            new GlobAsset(
-                array(
-                    $this['app.components_dir'].'/bootstrap/less/bootstrap.less',
-                    $this['app.resources_dir'].'/less/global.less',
-                ),
-                array($fm->get('less'))
-            ),
+            new FileAsset($this['app.resources_dir'].'/less/global.less', [$fm->get('less')]),
             new FilesystemCache($this['app.cache_dir'].'/assetic')
         ));
         $am->get('styles')->setTargetPath('css/styles.css');
@@ -57,10 +44,13 @@ return array(
                 array(
                     new GlobAsset(array($this['app.components_dir'].'/jquery/jquery.js')),
                     new GlobAsset(array($this['app.resources_dir'].'/coffee/*.coffee'), array($fm->get('coffee'))),
-                )
+                ),
+                $this['debug'] ? [] : [$fm->get('uglify_js')]
             ),
             new FilesystemCache($this['app.cache_dir'].'/assetic')
         ));
         $am->get('scripts')->setTargetPath('js/scripts.js');
+
+        return $am;
     })
 );

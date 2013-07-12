@@ -55,6 +55,7 @@ class Application extends BaseApplication
                 new BuildCommand,
                 new AddUserCommand,
                 new RemoveUserCommand,
+                new AsseticDumpCommand,
             ]
         );
     }

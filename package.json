@@ -6,6 +6,7 @@
         "coffee-script": "*",
         "coffeelint":    "*",
         "less":          "*",
-        "bower":         "*"
+        "bower":         "*",
+        "uglify-js":     "~2.3"
     }
 }

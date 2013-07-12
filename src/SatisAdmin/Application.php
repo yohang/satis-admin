@@ -93,7 +93,17 @@ class Application extends BaseApplication
                 'twig.form.templates' => ['form/form_div_layout.html.twig'],
             ]
         );
-        $this->register(new AsseticServiceProvider, require $this['app.config_dir'].'/assetic.php');
+        $this->register(
+            new AsseticServiceProvider,
+            [
+                'assetic.path_to_web' => $this['app.web_dir'],
+                'assetic.options' => [
+                    'debug'            => $this['debug'],
+                    'auto_dump_assets' => $this['debug'],
+                ],
+            ]
+        );
+        require $this['app.config_dir'].'/assetic.php';
 
         if ($this['debug']) {
             $this->register(
