@@ -2,7 +2,6 @@
 
 namespace SatisAdmin\Console;
 
-use Monolog\Logger;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
