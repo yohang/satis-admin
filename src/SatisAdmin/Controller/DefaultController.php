@@ -7,7 +7,6 @@ use SatisAdmin\Events;
 use SatisAdmin\Form\ConfigType;
 use SatisAdmin\Form\RepositoryType;
 use SatisAdmin\Model\Repository;
-use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
 

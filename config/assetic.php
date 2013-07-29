@@ -30,7 +30,7 @@ $this['assetic.filter_manager'] = $this->share(
 );
 
 $this['assetic.asset_manager'] = $this->share(
-    $this->extend('assetic.asset_manager', function(AssetManager $am, Application $app) {
+    $this->extend('assetic.asset_manager', function(AssetManager $am) {
         $fm = $this['assetic.filter_manager'];
 
         $am->set('styles', new AssetCache(
