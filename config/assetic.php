@@ -10,8 +10,6 @@ use Assetic\FilterManager;
 use Assetic\Filter\CoffeeScriptFilter;
 use Assetic\Filter\LessFilter;
 use Assetic\Filter\UglifyJs2Filter;
-use SatisAdmin\Application;
-
 
 $this['assetic.filter_manager'] = $this->share(
     $this->extend('assetic.filter_manager', function(FilterManager $fm) {
