@@ -7,7 +7,7 @@
         "bt51/gaufrette-serviceprovider": "1.0.*",
         "composer/composer":              "1.0.*@dev",
         "composer/satis":                 "dev-master@dev",
-        "mheap/silex-assetic":            "1.0.*@dev",
+        "mheap/silex-assetic":            "1.0.*",
         "monolog/monolog":                "1.5.*",
         "silex/silex":                    "1.1.*",
         "silex/web-profiler":             "1.0.*",
