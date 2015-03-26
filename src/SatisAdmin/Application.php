@@ -58,6 +58,7 @@ class Application extends BaseApplication
         $this['app.resources_dir']  = $this['app.root_dir'].'/resources';
         $this['app.web_dir']        = $this['app.root_dir'].'/web';
         $this['app.users_file']     = $this['app.config_dir'].'/users.json';
+        $this['app.env_settings_file']  = $this['app.config_dir'].'/env_settings.json';
 
         require sprintf('%s/%s.php', $this['app.config_dir'], $env);
     }

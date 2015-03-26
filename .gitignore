@@ -2,6 +2,7 @@
 /cache/*
 /bower_components
 /config/users.json
+/config/env_settings.json
 /composer.phar
 /data/confi*.json
 /logs/*.log
@@ -11,3 +12,5 @@
 /web/packages.json
 !.gitkeep
 !bin/console
+.idea
+config/deploy_settings.rb
