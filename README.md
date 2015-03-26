@@ -37,3 +37,15 @@ Run test suite
  $ php -Slocalhost:8000 -tweb
  $ ./bin/behat
 ```
+
+Troubleshooting
+---------------
+
+If you cannot build satis repository check your prod.log looking for a message of lost HOME or COMPOSER_HOME environment variable, 
+this can be fixed with: 
+
+```sh
+
+ $ php bin/console setting:add COMPOSER_HOME /whatever/is/your/composer/home
+
+```
