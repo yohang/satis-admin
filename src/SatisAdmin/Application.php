@@ -118,9 +118,5 @@ class Application extends BaseApplication
 
     protected function bindEvents()
     {
-        $this['dispatcher']->addListener(Events::CONFIG_SAVED, function() {
-            $this->log('Config saved', [], Logger::INFO);
-            $this['satis_runner']->run();
-        });
     }
 }

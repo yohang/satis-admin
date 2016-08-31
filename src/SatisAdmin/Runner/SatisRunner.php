@@ -30,19 +30,25 @@ class SatisRunner implements RunnerInterface
      * @var string
      */
     protected $binDir;
+    /**
+     * @var string
+     */
+    private $cacheDir;
 
     /**
      * @param ModelManager $manager
      * @param Logger       $logger
      * @param string       $outputDir
      * @param string       $binDir
+     * @param string       $cacheDir
      */
-    public function __construct(ModelManager $manager, Logger $logger, $outputDir, $binDir)
+    public function __construct(ModelManager $manager, Logger $logger, $outputDir, $binDir, $cacheDir)
     {
         $this->manager   = $manager;
         $this->logger    = $logger;
         $this->outputDir = $outputDir;
         $this->binDir    = $binDir;
+        $this->cacheDir  = $cacheDir;
     }
 
     public function run()
@@ -57,7 +63,10 @@ class SatisRunner implements RunnerInterface
                 $configFile,
                 $this->outputDir
             ]
-        )->getProcess();
+        )
+            ->setTimeout(null)
+            ->addEnvironmentVariables(['HOME' => $this->cacheDir])
+            ->getProcess();
 
         $this->logger->addInfo('Building config...', ['command-line' => $process->getCommandLine()]);
         if (0 === $process->run()) {

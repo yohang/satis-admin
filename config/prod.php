@@ -10,6 +10,7 @@ $this['satis_runner'] = $this->share(function() {
         $this['model_manager'],
         $this['monolog'],
         $this['app.web_dir'],
-        $this['app.bin_dir']
+        $this['app.bin_dir'],
+        $this['app.cache_dir']
     );
 });
