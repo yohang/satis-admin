@@ -9,5 +9,6 @@
 /vendor
 /web/index.html
 /web/packages.json
+/web/include
 !.gitkeep
 !bin/console

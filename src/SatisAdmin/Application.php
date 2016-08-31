@@ -50,7 +50,7 @@ class Application extends BaseApplication
         $this['env']                = $env;
         $this['app.root_dir']       = realpath(__DIR__.'/../..');
         $this['app.cache_dir']      = $this['app.root_dir'].'/cache';
-        $this['app.bin_dir']        = $this['app.root_dir'].'/bin';
+        $this['app.bin_dir']        = $this['app.root_dir'].'/vendor/composer/satis/bin';
         $this['app.config_dir']     = $this['app.root_dir'].'/config';
         $this['app.components_dir'] = $this['app.root_dir'].'/bower_components';
         $this['app.data_dir']       = $this['app.root_dir'].'/data';

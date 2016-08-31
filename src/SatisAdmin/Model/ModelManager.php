@@ -47,7 +47,7 @@ class ModelManager
      */
     public function persist(Config $config)
     {
-        $this->filesystem->write($this->configFile, json_encode($config), true);
+        $this->filesystem->write($this->configFile, json_encode($config, JSON_PRETTY_PRINT), true);
     }
 
     /**

@@ -3,8 +3,7 @@ branches:
         - master
 language: php
 php:
-    - 5.4
-    - 5.5
+    - 7.0
     - hhvm
 before_install:
     - sudo apt-get update -qq
@@ -12,6 +11,8 @@ before_install:
     - phantomjs --webdriver=4444 > /dev/null &
 before_script:
     - composer --no-interaction install
+    - npm install
+    - bower install
     - php -Slocalhost:8000 -tweb > /dev/null 2>&1 &
     - bin/console user:add admin admin
 script:

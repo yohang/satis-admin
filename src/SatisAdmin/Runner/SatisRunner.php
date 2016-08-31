@@ -53,7 +53,7 @@ class SatisRunner implements RunnerInterface
 
     public function run()
     {
-        $configFile = tempnam(sys_get_temp_dir(), 'satis-admin');
+        $configFile = tempnam($this->cacheDir . '/satis', 'satis-admin');
         file_put_contents($configFile, $this->manager->getJson());
         $process = ProcessBuilder::create(
             [
@@ -70,6 +70,7 @@ class SatisRunner implements RunnerInterface
 
         $this->logger->addInfo('Building config...', ['command-line' => $process->getCommandLine()]);
         if (0 === $process->run()) {
+            unlink($configFile);
             $this->logger->addInfo('Config built.');
         } else {
             $this->logger->addError(

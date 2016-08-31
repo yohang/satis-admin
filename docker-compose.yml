@@ -1,0 +1,15 @@
+fpm:
+    build:        docker/fpm
+    volumes:      [ '.:/www', '~/.ssh:/root/.ssh' ]
+
+nginx:
+    build:        docker/nginx
+    links:        [ fpm      ]
+    ports:        [ '80:80'  ]
+    volumes:      [ '.:/www', '~/.ssh:/root/.ssh' ]
+
+cli:
+    build:        docker/cli
+    volumes:      [ '.:/www', '~/.ssh:/root/.ssh' ]
+    stdin_open:   true
+    tty:          true

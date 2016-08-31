@@ -4,36 +4,31 @@
     "keywords": ["satis", "interface", "composer", "silex"],
     "license": "MIT",
     "require": {
-        "bt51/gaufrette-serviceprovider": "1.0.*",
-        "composer/composer":              "1.0.*@dev",
-        "composer/satis":                 "dev-master@dev",
-        "mheap/silex-assetic":            "1.0.*",
-        "monolog/monolog":                "1.5.*",
-        "silex/silex":                    "1.1.*",
-        "silex/web-profiler":             "1.0.*",
-        "symfony/config":                 ">=2.2,<3.0",
-        "symfony/console":                ">=2.2,<3.0",
-        "symfony/form":                   ">=2.2,<3.0",
-        "symfony/process":                ">=2.2,<3.0",
-        "symfony/security":               ">=2.2,<3.0",
-        "symfony/translation":            ">=2.2,<3.0",
-        "symfony/validator":              ">=2.2,<3.0",
-        "yohang/dependency-tools":        "1.0.*"
+        "bt51/gaufrette-serviceprovider": "^1.0",
+        "composer/composer":              "^1.0",
+        "composer/satis":                 "^1.0@alpha",
+        "mheap/silex-assetic":            "^1.0",
+        "monolog/monolog":                "^1.5",
+        "silex/silex":                    "^1.1",
+        "silex/web-profiler":             "^1.0",
+        "symfony/config":                 "^2.2",
+        "symfony/console":                "^2.2",
+        "symfony/form":                   "^2.2",
+        "symfony/process":                "^2.2",
+        "symfony/security":               "^2.2",
+        "symfony/translation":            "^2.2",
+        "symfony/validator":              "^2.2"
     },
 
     "require-dev": {
-        "behat/behat":                  "2.4.*",
-        "behat/mink-extension":         "1.0.*",
-        "behat/mink-browserkit-driver": "1.0.*",
-        "behat/mink-selenium2-driver":  "1.0.*",
-        "phpunit/phpunit":              "3.7.*"
+        "behat/behat":                  "^2.4",
+        "behat/mink-extension":         "^1.0",
+        "behat/mink-browserkit-driver": "^1.0",
+        "behat/mink-selenium2-driver":  "^1.0",
+        "phpunit/phpunit":              "^3.7"
     },
 
-    "minimum-stability": "stable",
-
-    "config": {
-        "bin-dir": "bin/"
-    },
+    "config": { "bin-dir": "bin/", "platform": { "php": "7.0" } },
 
     "autoload": {
         "psr-0": {
@@ -41,24 +36,7 @@
         }
     },
 
-    "scripts": {
-        "post-install-cmd": [
-            "Yohang\\DependencyTools::installDeps"
-        ],
-        "post-update-cmd": [
-            "Yohang\\DependencyTools::installDeps"
-        ]
-    },
-
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.*-dev"
-        },
-        "dependency-tools": {
-            "npm":   true,
-            "bower": {
-                "path": "./node_modules/.bin/bower"
-            }
-        }
+        "branch-alias": { "dev-master": "1.0.*-dev" }
     }
 }

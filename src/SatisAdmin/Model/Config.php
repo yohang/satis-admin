@@ -133,7 +133,7 @@ class Config implements \JsonSerializable
             'name'         => $this->getName(),
             'homepage'     => $this->getHomepage(),
             'require-all'  => $this->getRequireAll(),
-            'repositories' => $this->getRepositories(),
+            'repositories' => array_values($this->getRepositories()),
         ];
     }
 
